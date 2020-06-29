@@ -22,6 +22,8 @@ gcc -c function.c -o function.o
 after compile, do link them, "shellexe" is a name,you can name it as you like
 gcc main.o function.o -o shellexe
 
+you can also use ./compile.sh to compile quickly
+
 finally run it
 ./shellexe
 
