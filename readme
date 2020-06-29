@@ -1,0 +1,30 @@
+操作指南：
+在这里打中文太难受了，我下面就打英文了
+For now, I created three files:
+	main.c
+	function.c
+	function.h
+	testFunction.c
+
+most functions will be writen in function.c, and add declaration in function.h
+main.c will use functions in function.h though #inlclude "function.h"
+
+I alse created testFunction.c in order to test the functions in function.c
+
+To run the program, you need to compile and link use the commends follow:
+
+compile the main program
+gcc -c main.c -o main.o
+
+if you have modified function.c,then you need to compile function.c
+gcc -c function.c -o function.o
+
+after compile, do link them, "shellexe" is a name,you can name it as you like
+gcc main.o function.o -o shellexe
+
+finally run it
+./shellexe
+
+When useing testFunction.c to test, take it like main.c, 
+compile, link and run it.
+
