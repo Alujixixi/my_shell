@@ -2,6 +2,7 @@
 #include "string.h"
 #include "head.h"
 #include <stdio.h>
+#include <ctype.h>
 void split(char *src,const char *separator,char **dest,int *num) {
      char *pNext;
      int count = 0;
