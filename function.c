@@ -3,6 +3,12 @@
 #include "head.h"
 #include <stdio.h>
 #include <ctype.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 void split(char *src,const char *separator,char **dest,int *num) {
      char *pNext;
      int count = 0;
@@ -44,3 +50,34 @@ void delete_space(char *string) {
 void get_string(char *s, int size) {
 	fgets(s, size, stdin);
 }
+
+void init_daemon(void) {   //daemon模式的后台运行程序
+    int pid;
+    int i;
+    
+    /* 是第一子进程，后台继续执行 */
+    /* 第一子进程成为新的会话组长和进程组长 */
+    setsid();
+    /* 并与控制终端分离  */
+    if(pid=fork()) {
+        exit(0);
+        /* 是第一子进程，结束第一子进程 */
+    }else if(pid< 0) {
+        exit(1);
+        /* fork失败，退出 */
+    }
+    /* 是第二子进程，继续 */
+    /* 第二子进程不再是会话组长 */
+    /* 关闭打开的文件描述符 */
+    for(i=0;i< NOFILE;++i) {
+        close(i);
+    }
+    /* 改变工作目录到/tmp */
+    chdir("/tmp");
+   /* 重设文件创建掩模 */
+    umask(0);
+    return;
+}
+
+
+

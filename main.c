@@ -17,18 +17,23 @@ int main() {
 		commend[strlen(commend)-1] = '\0';	// delete \n in the end	
 		split(commend, " ", argv, &argc);
 		argv[argc] = NULL;
+		printf("长度为%d\n", argc);
+printf("%s\n", argv[argc-1]);
 		pid_t pid = fork();
 		if(pid < 0) {
 			printf("error creating child process!\n");
 			exit(0);
 		}
 		if(pid == 0) {
+			if(strcmp(argv[argc-1],"&") == 0){
+				FILE *fp;     
+    				init_daemon();
+			}
 			execvp(argv[0], argv);
-			exit(1);
+			//exit(1);
 		}
 		wait(NULL);
-		//在这里处理命令	
-
+			
 		printf("%s >", currentPath);
 	}	
 	return 0;
