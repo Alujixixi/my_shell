@@ -4,6 +4,9 @@
 #include "string.h"
 #include "sys/wait.h"
 #include "stdlib.h"
+#include "sys/types.h"
+#include "sys/stat.h"
+#include "fcntl.h"
 
 int main() {
 	char currentPath[80];
@@ -29,6 +32,19 @@ printf("%s\n", argv[argc-1]);
 				FILE *fp;     
     				init_daemon();
 			}
+			int i = 0;
+        		for(i = 0; i < argc ;++i)
+        		{
+            			if(strcmp(argv[i], ">") == 0)
+            			{
+                			char* file = argv[i+1];
+                			argv[i] = NULL;
+                			int fd = open(file,O_WRONLY | O_RDONLY,0666);//打开文件
+                			close(1);//关闭文件描述符1
+                			dup(fd);//将打开的文件描述符复制过来
+                			break;
+            			}
+        		}
 			execvp(argv[0], argv);
 			//exit(1);
 		}

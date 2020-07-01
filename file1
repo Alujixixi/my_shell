@@ -1,0 +1,20 @@
+total 100
+-rwxr-xr-x 1 root root   103 Jun 30 11:24 compile.sh
+-rwxr-xr-x 1 root root    67 Jul  1 15:23 dd.sh
+-rwxr-xr-x 1 root root   123 Jul  1 15:23 execcompile.sh
+-rwxr-xr-x 1 root root 17272 Jul  1 15:23 exectest
+-rw-r--r-- 1 root root   591 Jul  1 15:23 exectest.c
+-rw-r--r-- 1 root root  2664 Jul  1 15:23 exectest.o
+-rw-r--r-- 1 root root     0 Jul  1 16:19 file1
+-rw-r--r-- 1 root root  2137 Jul  1 15:23 function.c
+-rw-r--r-- 1 root root  2896 Jul  1 16:18 function.o
+-rw-r--r-- 1 root root   209 Jul  1 15:23 head.h
+-rw-r--r-- 1 root root  1477 Jun 30 11:29 history.h
+-rw-r--r-- 1 root root  1354 Jul  1 16:18 main.c
+-rw-r--r-- 1 root root  3064 Jul  1 16:18 main.o
+-rw-r--r-- 1 root root   882 Jun 30 11:24 readme
+-rwxr-xr-x 1 root root 13544 Jul  1 16:18 shellexe
+-rw-r--r-- 1 root root   257 Jul  1 15:23 test.c
+-rw-r--r-- 1 root root   285 Jun 30 11:24 testFunction.c
+-rw-r--r-- 1 root root  1904 Jun 30 11:24 testFunction.o
+-rw-r--r-- 1 root root    36 Jul  1 15:23 文件说明
