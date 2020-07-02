@@ -1,20 +1,44 @@
-total 100
+total 108
 -rwxr-xr-x 1 root root   103 Jun 30 11:24 compile.sh
 -rwxr-xr-x 1 root root    67 Jul  1 15:23 dd.sh
 -rwxr-xr-x 1 root root   123 Jul  1 15:23 execcompile.sh
 -rwxr-xr-x 1 root root 17272 Jul  1 15:23 exectest
 -rw-r--r-- 1 root root   591 Jul  1 15:23 exectest.c
 -rw-r--r-- 1 root root  2664 Jul  1 15:23 exectest.o
--rw-r--r-- 1 root root     0 Jul  1 16:19 file1
+-rw-r--r-- 1 root root  2656 Jul  2 11:00 file1
 -rw-r--r-- 1 root root  2137 Jul  1 15:23 function.c
--rw-r--r-- 1 root root  2896 Jul  1 16:18 function.o
+-rw-r--r-- 1 root root  2896 Jul  2 11:16 function.o
 -rw-r--r-- 1 root root   209 Jul  1 15:23 head.h
 -rw-r--r-- 1 root root  1477 Jun 30 11:29 history.h
--rw-r--r-- 1 root root  1354 Jul  1 16:18 main.c
--rw-r--r-- 1 root root  3064 Jul  1 16:18 main.o
+-rw-r--r-- 1 root root  3072 Jul  2 11:16 main.c
+-rw-r--r-- 1 root root  5464 Jul  2 11:16 main.o
 -rw-r--r-- 1 root root   882 Jun 30 11:24 readme
--rwxr-xr-x 1 root root 13544 Jul  1 16:18 shellexe
+-rwxr-xr-x 1 root root 13944 Jul  2 11:16 shellexe
 -rw-r--r-- 1 root root   257 Jul  1 15:23 test.c
 -rw-r--r-- 1 root root   285 Jun 30 11:24 testFunction.c
 -rw-r--r-- 1 root root  1904 Jun 30 11:24 testFunction.o
 -rw-r--r-- 1 root root    36 Jul  1 15:23 文件说明
+    
+root     pts/0        101.88.211.116   Mon Jun 29 16:23 - 18:35  (02:11)    
+root     pts/0        39.70.112.58     Mon Jun 29 14:32 - 16:20  (01:47)    
+root     pts/0        60.233.0.160     Mon Jun 29 10:46 - 12:25  (01:38)    
+root     pts/4        101.88.241.53    Sun Jun 28 13:37 - 16:13  (02:35)    
+root     pts/3        101.88.241.53    Sun Jun 28 13:28 - 15:41  (02:12)    
+root     pts/2        101.88.241.53    Sun Jun 28 13:04 - 15:33  (02:28)    
+root     pts/1        101.88.241.53    Sun Jun 28 11:41 - 14:29  (02:47)    
+root     pts/1        112.224.33.102   Sun Jun 28 11:29 - 11:36  (00:06)    
+root     pts/0        39.70.112.58     Sun Jun 28 11:28 - 13:39  (02:11)    
+root     pts/0        39.70.112.58     Sun Jun 28 10:30 - 11:26  (00:56)    
+root     pts/0        39.70.112.58     Sun Jun 28 10:01 - 10:30  (00:28)    
+reboot   system boot  3.10.0-1127.13.1 Sun Jun 28 10:01 - 10:52 (4+00:51)   
+root     pts/1        39.70.112.58     Sun Jun 28 10:00 - 10:00  (00:00)    
+root     pts/1        39.70.112.58     Sun Jun 28 09:58 - 09:59  (00:00)    
+root     pts/2        39.70.112.58     Sun Jun 28 09:58 - crash  (00:03)    
+root     pts/1        39.70.112.58     Sun Jun 28 09:42 - 09:58  (00:16)    
+root     pts/0        101.88.240.167   Sun Jun 28 08:49 - crash  (01:12)    
+root     pts/1        101.88.240.167   Sat Jun 27 22:13 - 22:53  (00:40)    
+root     pts/0        101.88.240.167   Sat Jun 27 21:46 - 00:15  (02:28)    
+root     pts/0        111.230.154.177  Sat Jun 27 20:42 - 20:42  (00:00)    
+reboot   system boot  3.10.0-1062.9.1. Sat Jun 27 20:39 - 10:52 (4+14:12)   
+
+wtmp begins Tue Jun  2 12:34:59 2020
