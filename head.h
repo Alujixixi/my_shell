@@ -7,7 +7,7 @@ void delete_space(char *string);
 
 void get_string(char *s, int size);
 
-void init_daemon(void);
+void background(char *cod, char **coms);
 
 
 #endif

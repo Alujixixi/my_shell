@@ -28,8 +28,6 @@ int main() {
         }
 		split(commend, " ", argv, &argc);
 		argv[argc] = NULL;
-		printf("长度为%d\n", argc);
-		printf("%s\n", argv[argc-1]);
 
 		int pipeHave = 0; // Does it contain pipes
 		int redirectHave = 0; // Does it contain redirects
@@ -64,16 +62,15 @@ int main() {
 				exit(0);
 			}
 			if(pid == 0) {
-				if(strcmp(argv[argc-1],"&") == 0){
-					FILE *fp;     
-	    				init_daemon();
-				}
 				if(redirectHave){
 					int fd = open(file,O_WRONLY | O_RDONLY,0666);//打开文件
 	                close(1);//关闭文件描述符1
 	                dup(fd);//将打开的文件描述符复制过来
 				}
-				execvp(argv[0], argv);
+				if(strcmp(argv[argc-1],"&") == 0){
+					background(argv[0], argv);
+				}else
+					execvp(argv[0], argv);
 				//exit(1);
 			}
 			wait(NULL);
