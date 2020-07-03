@@ -7,6 +7,7 @@
 #include "sys/types.h"
 #include "sys/stat.h"
 #include "fcntl.h"
+#include "errno.h"
 
 int i=0;
 int j=0;
@@ -56,23 +57,30 @@ int main() {
 
 
         if(!pipeHave){  // 如果不含有管道
-        	pid_t pid = fork();
-			if(pid < 0) {
-				printf("error creating child process!\n");
-				exit(0);
-			}
-			if(pid == 0) {
-				if(redirectHave){
-					int fd = open(file,O_WRONLY | O_RDONLY,0666);//打开文件
-	                close(1);//关闭文件描述符1
-	                dup(fd);//将打开的文件描述符复制过来
+		if(strcmp(argv[0],"cd") == 0){
+			chdir(argv[1]);
+			getcwd(currentPath,sizeof(currentPath));
+		}
+		else{
+			pid_t pid = fork();
+				if(pid < 0) {
+					printf("error creating child process!\n");
+					exit(0);
 				}
-				if(strcmp(argv[argc-1],"&") == 0){
-					background(argv[0], argv);
-				}else
-					execvp(argv[0], argv);
-				//exit(1);
-			}
+				if(pid == 0) {
+					if(redirectHave){
+						int fd = open(file,O_WRONLY | O_RDONLY,0666);//打开文件
+			        close(1);//关闭文件描述符1
+			        dup(fd);//将打开的文件描述符复制过来
+					}
+					if(strcmp(argv[argc-1],"&") == 0){
+						background(argv[0], argv);
+					}else
+						if(execvp(argv[0], argv)==-1)
+							printf("%s\n",strerror(errno));
+					//exit(1);
+				}
+		}
 			wait(NULL);
         } else {  // 如果含有管道
         	int pipe_fd[2];
@@ -102,7 +110,6 @@ int main() {
 		        execvp ( argv1[0] , argv1 );
 		    }
         }
-		
 		printf("%s >", currentPath);
 	}	
 	return 0;

@@ -8,6 +8,7 @@
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "errno.h"
 
 void split(char *src,const char *separator,char **dest,int *num) {
      char *pNext;
@@ -58,11 +59,12 @@ void background(char *cod, char **coms) {   //后台运行
 			exit(0);
 	}
 	if(pid == 0) {
-			execvp(cod, coms);
+			if(execvp(cod, coms)==-1) printf("%s\n",strerror(errno));
 			exit(0);
 	}
 	if(pid > 0) {
 			printf("The background proccess is %d\n", pid);
+			
 			kill(getpid(), SIGTERM);
 	}
 }
