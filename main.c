@@ -23,7 +23,7 @@ int main() {
 	printf("%s >", currentPath);
 	while(1) {
 		get_string(commend, sizeof(commend));	
-		commend[strlen(commend)-1] = '\0';	// delete \n in the end	
+		delete_space(commend);	
 		if(strncmp(commend,"exit",4) == 0 ) {
             exit(0);
         }
