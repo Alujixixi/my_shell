@@ -52,3 +52,79 @@ cd testfolder
 history 3
 #1593834756
 exit
+#1593863431
+history
+#1593863494
+exit
+#1593863609
+ls
+#1593863613
+cd testfolder
+#1593869755
+ls
+#1593869762
+cd testfolder
+#1593869774
+cd testfolder
+#1593870565
+cd testfolder
+#1593870627
+ps
+#1593870662
+cd testfolder
+#1593870961
+ls
+#1593870966
+cd testfolder
+#1593870976
+ls
+#1593870978
+ls -l
+#1593870984
+history 10
+#1593871001
+history 8
+#1593871020
+cd ..
+#1593871022
+exit
+#1593871043
+cd testfolder
+#1593871053
+cd ..
+#1593871061
+cat .bash_history
+#1593871075
+history
+#1593871099
+exit
+#1593871109
+mkdir aaaa
+#1593871112
+cd aaaa
+#1593871113
+ls
+#1593871120
+mkdir bbbb
+#1593871121
+cd ..
+#1593871125
+cd aaaa
+#1593871128
+cd bbbb
+#1593871130
+exit
+#1593871134
+cd aaaa
+#1593871137
+cd bbbbb
+#1593871141
+cd bbbb
+#1593871147
+cd ..
+#1593871149
+cd ...
+#1593871152
+cd ..
+#1593871157
+exit

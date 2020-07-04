@@ -21,10 +21,13 @@ int main() {
 	int argc = 0;
 	getcwd(currentPath,sizeof(currentPath));
 	printf("%s >", currentPath);
-	char *pwd = currentPath;
+	char pwd[80];
+	strcat(pwd,currentPath);
 	while(1) {
+		//printf("%s\n",pwd);
 		get_string(commend, sizeof(commend));	
 		delete_space(commend);
+		//printf("%s\n",commend);
 		write_history(pwd,commend);
 		if(strncmp(commend,"exit",4) == 0 ) {
             exit(0);
