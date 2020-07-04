@@ -1,9 +1,24 @@
-total 108
--rwxr-xr-x 1 root root   103 Jun 30 11:24 compile.sh
--rwxr-xr-x 1 root root    67 Jul  1 15:23 dd.sh
--rwxr-xr-x 1 root root   123 Jul  1 15:23 execcompile.sh
--rwxr-xr-x 1 root root 17272 Jul  1 15:23 exectest
--rw-r--r-- 1 root root   591 Jul  1 15:23 exectest.c
+The background proccess is 1127
+compile.sh
+dd.sh
+execcompile.sh
+exectest
+exectest.c
+exectest.o
+file1
+function.c
+function.o
+head.h
+history.h
+main.c
+main.o
+readme
+shellexe
+test.c
+testFunction.c
+testFunction.o
+文件说明
+rw-r--r-- 1 root root   591 Jul  1 15:23 exectest.c
 -rw-r--r-- 1 root root  2664 Jul  1 15:23 exectest.o
 -rw-r--r-- 1 root root  2656 Jul  2 11:00 file1
 -rw-r--r-- 1 root root  2137 Jul  1 15:23 function.c

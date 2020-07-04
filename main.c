@@ -21,14 +21,25 @@ int main() {
 	int argc = 0;
 	getcwd(currentPath,sizeof(currentPath));
 	printf("%s >", currentPath);
+	char *pwd = currentPath;
 	while(1) {
 		get_string(commend, sizeof(commend));	
-		delete_space(commend);	
+		delete_space(commend);
+		write_history(pwd,commend);
 		if(strncmp(commend,"exit",4) == 0 ) {
             exit(0);
         }
 		split(commend, " ", argv, &argc);
 		argv[argc] = NULL;
+		if(strncmp(argv[0],"history",7)==0){
+			if (argv[1] == NULL) get_history(pwd,200); else {
+				char tmp_number = *(argv[1]);
+				int tmp_n = tmp_number - '0';
+				get_history(pwd,tmp_n);
+			}
+			printf("%s >", currentPath);
+			continue;
+		}
 
 		int pipeHave = 0; // Does it contain pipes
 		int redirectHave = 0; // Does it contain redirects
@@ -57,12 +68,12 @@ int main() {
 
 
         if(!pipeHave){  // 如果不含有管道
-		if(strcmp(argv[0],"cd") == 0){
-			chdir(argv[1]);
-			getcwd(currentPath,sizeof(currentPath));
-		}
-		else{
-			pid_t pid = fork();
+			if(strcmp(argv[0],"cd") == 0){
+				chdir(argv[1]);
+				getcwd(currentPath,sizeof(currentPath));
+			}
+			else{
+				pid_t pid = fork();
 				if(pid < 0) {
 					printf("error creating child process!\n");
 					exit(0);
