@@ -74,6 +74,7 @@ int main() {
 			        dup(fd);//将打开的文件描述符复制过来
 					}
 					if(strcmp(argv[argc-1],"&") == 0){
+						argv[argc-1] = NULL;
 						background(argv[0], argv);
 					}else
 						if(execvp(argv[0], argv)==-1)
