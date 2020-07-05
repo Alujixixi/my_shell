@@ -12,4 +12,6 @@ void background(char *cod, char **coms);
 void write_history(char *pwd,char *command);
 
 void get_history(char *pwd,int n);
+
+void execute(char **argv,int argc,char *pwd);
 #endif

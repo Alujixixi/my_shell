@@ -8,8 +8,9 @@
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include<time.h>
+#include <time.h>
 #include "errno.h"
+#include "fcntl.h"
 
 void split(char *src,const char *separator,char **dest,int *num) {
      char *pNext;
@@ -145,4 +146,108 @@ void get_history(char *pwd,int n){  // Get n commands in history.
     fclose(fp);
 }
 
+void do_execute_pipeNotHave(char **argv,int argc,int redirectHave,char *file){
+    
+    pid_t pid = fork();
+    if(pid < 0) {
+        printf("error creating child process!\n");
+        exit(0);
+    }
+    if(pid == 0) {
+        if(redirectHave){
+            int fd = open(file,O_WRONLY | O_RDONLY,0666);//打开文件
+            close(1);//关闭文件描述符1
+            dup(fd);//将打开的文件描述符复制过来
+        }
+        if(strcmp(argv[argc-1],"&") == 0){
+            argv[argc-1] = NULL;
+            background(argv[0], argv);
+        }else
+            if(execvp(argv[0], argv)==-1)
+                printf("%s\n",strerror(errno));
+        //exit(1);
+    }
+
+    wait(NULL);
+}
+
+void do_execute_pipeHave(char **argv1, char **argv2){
+
+    int pipe_fd[2];
+    int status;
+    pipe(pipe_fd);
+    pid_t child1,child2;
+    if ((child1=fork())!=0) //父进程
+    { 
+        if ( (child2 = fork()) == 0 )
+        { //子进程 
+            close ( pipe_fd[1] );
+            close ( fileno ( stdin ) );
+            dup2 ( pipe_fd[0] , fileno(stdin));
+            close ( pipe_fd[0] );
+            execvp ( argv2[0] , argv2 );
+        } 
+        else  
+        {
+            close ( pipe_fd[0]);
+            close ( pipe_fd[1]);
+            waitpid ( child2 , &status , 0 );
+        }
+        waitpid ( child1 , &status , 0 );
+    } 
+    else 
+    {
+        //printf ( "subshell 3cmd %d\n" , getpid() );
+        close ( pipe_fd[0] );
+        close ( fileno(stdout));
+        dup2 ( pipe_fd[1] , fileno(stdout));
+
+        close ( pipe_fd[1] );
+        execvp ( argv1[0] , argv1 );
+    }
+}
+
+
+void execute(char **argv,int argc,char *pwd){
+
+    if(strncmp(argv[0],"history",7)==0){ // 如果说是查询历史命令
+        if (argv[1] == NULL) get_history(pwd,200); else { // 无参数
+            int tmp_n = 0;
+            while(*argv[1] != '\0'){
+                tmp_n = tmp_n*10 + (*argv[1] - '0');
+                ++argv[1];
+            }
+            get_history(pwd,tmp_n);
+        }
+        return;
+    }
+
+    char *argv1[8] = {0};
+    char *argv2[8] = {0};
+    int pipeHave = 0; // Does it contain pipes
+    int redirectHave = 0; // Does it contain redirects
+    char* file; // 重定向所指向的文件
+
+    int i=0;
+    int j=0;
+    for(i = 0; i < argc ;++i){
+        if(strcmp(argv[i], ">") == 0){  // 输出重定向
+            redirectHave = 1;
+            file = argv[i+1];
+            argv[i] = NULL;
+            break;
+        } else if (strcmp(argv[i], "|") == 0){  // 含有管道
+            pipeHave = 1;
+            
+            for(j = 0;j < i;j ++)
+                argv1[j] = argv[j];
+            for(j = i+1;j < argc;j ++)
+                argv2[j-(i+1)] = argv[j];
+
+            break;
+        }
+    }
+    if(!pipeHave) do_execute_pipeNotHave(argv,argc,redirectHave,file); 
+        else do_execute_pipeHave(argv1,argv2);
+}
 
