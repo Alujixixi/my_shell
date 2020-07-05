@@ -10,6 +10,7 @@
 #include "errno.h"
 
 int main() {
+	//init_shell();
 	char currentPath[80];
 	char commend[100];
 	char *argv[8] = {0};
@@ -23,15 +24,20 @@ int main() {
 		delete_space(commend);
 		write_history(pwd,commend);
 		if(strncmp(commend,"exit",4) == 0 ) {
-            exit(0);
-        }
+            		exit(0);
+        	}
 		split(commend, " ", argv, &argc);
 		argv[argc] = NULL;
+		
 		if(strcmp(argv[0],"cd") == 0){
-	        chdir(argv[1]);
-	        getcwd(currentPath,sizeof(currentPath));
-	        continue;
-	    }
+	        	chdir(argv[1]);
+	       		getcwd(currentPath,sizeof(currentPath));
+	        	continue;
+	    	}
+		if(0 == scanfile(argv[0]) ) { //input commend not found
+			printf("no such commend!\n");
+			continue;
+		}
 		execute(argv,argc,pwd);
 	}	
 	return 0;

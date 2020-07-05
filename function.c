@@ -11,6 +11,34 @@
 #include <time.h>
 #include "errno.h"
 #include "fcntl.h"
+#include <sys/wait.h>
+
+char pathvar[100];
+char *system_paths[20] = {0};
+int path_cnt = -1;
+
+void init_pathvar() {
+	strcpy(pathvar, getenv("PATH"));
+	split(pathvar, ":", system_paths, &path_cnt);
+	return;
+}
+
+int scanfile(char *cmd) {
+	if(path_cnt < 0)
+			init_pathvar();
+	int i;
+	for( i = 0; i < path_cnt; i++) {
+		char fp[100];
+		char cmdstr[10];
+		strcpy(fp, system_paths[i]);
+		strcpy(cmdstr, cmd);
+		strcat(strcat(fp, "/"), cmdstr);
+		if(access(fp, 0) == 0) {
+			return 1;
+		}
+	}
+	return 0;
+}
 
 void split(char *src,const char *separator,char **dest,int *num) {
      char *pNext;
@@ -162,10 +190,14 @@ void do_execute_pipeNotHave(char **argv,int argc,int redirectHave,char *file){
         if(strcmp(argv[argc-1],"&") == 0){
             argv[argc-1] = NULL;
             background(argv[0], argv);
-        }else
+        }else {
+		//int i;
+		//for(i = 0; i < argc; i++)
+			//printf("%s\n", argv[i]);
             if(execvp(argv[0], argv)==-1)
                 printf("%s\n",strerror(errno));
-        //exit(1);
+        //exit(1)
+	}
     }
 
     wait(NULL);
