@@ -496,3 +496,9 @@ laslsa
 sadjaldj
 #1593951188
 \jdsaoijao
+#1593951331
+./sh	
+#1593951333
+./shell
+#1593951506
+./dd.sh

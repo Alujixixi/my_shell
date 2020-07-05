@@ -37,6 +37,8 @@ int scanfile(char *cmd) {
 			return 1;
 		}
 	}
+	if(access(cmd, 0) == 0) // commend in current directory
+		return 1; 
 	return 0;
 }
 
